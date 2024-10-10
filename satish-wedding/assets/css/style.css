@@ -1,0 +1,372 @@
+@font-face {
+    font-family: 'Engagement';
+    src: url('../fonts/Engagement-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.section {
+    height: 100vh;
+    scroll-snap-align: start;
+    transition: transform 0.5s ease-in-out;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    font-family: "Engagement", cursive;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.video-background {
+    position: relative;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden;
+}
+
+.video-background video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%; /* Ensure the video covers the width */
+    min-height: 100%; /* Ensure the video covers the height */
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%); /* Center the video */
+    z-index: -1; /* Place it behind the content */
+    object-fit: cover; /* Make the video cover the area */
+}
+
+.content {
+    position: absolute;
+    z-index: 1; /* Bring the content in front of the video */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+.content.path {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #00000033;
+}
+.section.swipe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    width: 100%;
+    height: 100vh;
+}
+.swipe video {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+.content.zooming-love {
+    width: 100%;
+    height: 100vh;
+}
+.content.names {
+    top: 46%;
+    left: 60%;
+}
+.content.shadow {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+.content h1 {
+    padding: 30px;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    font-weight: normal;
+    text-shadow: 0px 0px 3px #fff;
+}
+.content h1 .jesus {
+    font-size: 7vw;
+    color: #242424;
+    display: block;
+}
+.content h1 .created {
+    color: #961b1b;
+    font-size: 5vw;
+    display: block;
+}
+.content h1 .one-again {
+    color: #780c78;
+    display: block;
+    font-size: 5vw;
+}
+.content h1 .paths {
+    color: #fff;
+    display: block;
+    font-size: 5vw;
+    text-shadow: 4px 3px 4px #000000;
+}
+.content h1 .paths .date{
+    color: #62ff81;
+}
+.content.zooming-love img {
+    width: 25%;
+    position: absolute;
+    bottom: 0;
+    margin: auto;
+    left: 38%;
+    transform: none !important;
+}
+.content.zooming-love span{
+    width: 100%;
+    margin: auto;
+    transform: none !important;
+    font-size: 5vw;
+    color: #510643;
+    text-align: center;
+    text-shadow: 0px 0px 3px #ffffff;
+    display: block;
+    background: #a066934f;
+}
+.shadow span {
+    color: #00540d;
+    display: block;
+    font-size: 10vw;
+    text-shadow: 2px 2px 6px #fff;
+}
+.shadow .names-sirisha {
+    margin-left: 22%;
+}
+.content.shadow img {
+    width: 37%;
+    position: absolute;
+    bottom: -28px;
+    right: 0%;
+    opacity: 1;
+    z-index: -1;
+    transform: none !important;
+}
+/* enguaged */
+.w-100 {
+    width: 100%;
+}
+.w-33 {
+    width: 33%;
+}
+.w-67 {
+    width: 67%;
+}
+.d-flex {
+    display: flex;
+}
+.w-33 img {
+    height: 100vh;
+    width: auto;
+    transform: none !important;
+}
+.enguaged h1 .one-again {
+    color: #780c78;
+    display: block;
+    font-size: 4vw;
+    margin: 10% auto auto;
+    text-align: center;
+    font-weight: normal;
+    width: 90%;
+    text-shadow: 0px 0px 3px #fff;
+}
+.enguaged h1 .one-again .date{
+    color: red;
+}
+ /*floating baloons  */
+  .balloon {
+    position: absolute; 
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    /* background-color: #ffcc66; */
+    box-shadow: inset 0 0 10px #f8a100;
+    animation: move 10s ease-in-out infinite;
+    z-index: 0;
+    overflow: hidden;
+  
+  }
+  .balloon img {
+    width: 100%;
+    transform: none !important;
+  }
+  
+  @keyframes move {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(25%, 75%);
+    }
+    50% {
+      transform: translate(50%, 50%);
+    }
+    75% {
+      transform: translate(75%, 25%);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  
+  .balloon:nth-child(1) {
+    animation-delay: 0s;
+    top: 3%;
+    left: 10%;
+  }
+  
+  .balloon:nth-child(2) {
+    animation-delay: 2s;
+    top: 5%;
+    left: 41%;
+  }
+  
+  .balloon:nth-child(3) {
+    animation-delay: 4s;
+    bottom: 5%;
+    right: 20%;
+  }
+  
+  .balloon:nth-child(4) {
+    animation-delay: 6s;
+    bottom: 5%;
+    left: 5%;
+  }
+  
+  .balloon:nth-child(5) {
+    animation-delay: 8s;
+    top: 3%;
+    right: 5%;
+  }
+/* rose petals */
+.dot{
+    width:35px;
+    height:35px;
+    position:absolute;
+    background: url(../img/rose.png);
+    background-size: 100% 100%;
+  }
+  html, body, #rosePetals {width:100%; height:100%; }
+  #logo{ left:50%; top:50%; position:absolute; border-radius:10px; }
+
+  /* invite */
+.invite {
+    display: flex;
+}
+.invite .w-33 {
+    width: 33%;
+}
+.invite .w-33 img {
+    width: auto;
+    height: 100vh;
+    transform: none !important;
+}
+.invite .content {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #301c3370;
+    transform: none;
+}
+.invite .content.thank {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    transform: none;
+}
+.invite .one-again {
+    color: #fff !important;
+    text-shadow: 0px 0px 3px #000;
+}
+
+#flipMessage {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0);
+    color: white;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+#flipMessage video {
+    width: 100%;
+    height: auto;
+}
+@media screen and (max-height: 600px){
+    .balloon {
+        width: 130px;
+        height: 130px;
+    }
+    .content.zooming-love img {
+        width: 20%;
+        position: absolute;
+        bottom: 0;
+        margin: auto;
+        left: 38%;
+        transform: none !important;
+    }
+    .content.shadow img {
+        width: 35%;
+    }
+}
+
+
+/* Loader styles */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader {
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.loader img {
+    width: 100%;
+    height: auto;
+    transform: none !important;
+}
