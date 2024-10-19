@@ -154,16 +154,16 @@ html, body {
 .w-100 {
     width: 100%;
 }
-.w-33 {
-    width: 33%;
+.w-59 {
+    width: 59%;
 }
-.w-67 {
-    width: 67%;
+.w-41 {
+    width: 41%;
 }
 .d-flex {
     display: flex;
 }
-.w-33 img {
+.w-59 img {
     height: 100vh;
     width: auto;
     transform: none !important;
@@ -256,7 +256,10 @@ html, body {
   }
   html, body, #rosePetals {width:100%; height:100%; }
   #logo{ left:50%; top:50%; position:absolute; border-radius:10px; }
-
+  #rosePetals1, #rosePetals2 {
+    position: absolute;
+    top: 0;
+  }
   /* invite */
 .invite {
     display: flex;
@@ -336,8 +339,42 @@ html, body {
         width: 35%;
     }
 }
-
-
+/* full screen */
+.fullScreen {
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #c8bbfb;
+    z-index: 9;
+}
+#fullscreen-btn {
+    padding: 10px 30px;
+    border: 1px solid #513386;
+    background: transparent;
+    color: #513386;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.fullScreen img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+.fullScreen h3 {
+    font-family: sans-serif;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    justify-content: center;
+}
 /* Loader styles */
 .loader-container {
     position: fixed;
@@ -345,7 +382,7 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    background-color: #c8bbfb;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -369,4 +406,8 @@ html, body {
     width: 100%;
     height: auto;
     transform: none !important;
+}
+/* audio */
+#background-audio {
+    display: none;
 }
