@@ -183,206 +183,208 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/TweenMax.min.js"></script>
     
-    <script>
-        //--------------------Scrolling-------------------
-        const sections = document.querySelectorAll('.section');
-        let currentIndex = 0;
-        let isScrolling = false;  // Cooldown flag to prevent rapid scrolling
-        let autoScrollTimeout;  // Variable to store timeout for auto-scroll
-        const autoScrollDelay = 17000;  // 17 seconds
-        
-        const scrollToSection = (index) => {
-            if (index >= 0 && index < sections.length && !isScrolling) {
-                isScrolling = true;  // Set the cooldown flag
-                sections[index].scrollIntoView({ behavior: 'smooth' });
-                currentIndex = index;
-        
-                // Reset the timeout for auto-scroll after user interaction
-                resetAutoScroll();
-        
-                // Set a timeout equal to the smooth scroll duration
-                setTimeout(() => {
-                    isScrolling = false;  // Reset the flag after scrolling completes
-                    checkAndExitFullScreen();  // Check if we should exit fullscreen
-                }, 1200);  // 1200ms, slightly longer than the transition time
-            }
-        };
-        
-        // Check and exit fullscreen if on the last section
-        const checkAndExitFullScreen = () => {
-            if (currentIndex === sections.length - 1) {
-                setTimeout(() => {
-                    if (document.fullscreenElement) {
-                        document.exitFullscreen();
-                    }
-                }, 10000); // Exit fullscreen after 10 seconds
-            }
-        };
-        
-        // Handle scroll via mouse wheel
-        window.addEventListener('wheel', (event) => {
-            if (!isScrolling) {
-                if (event.deltaY > 0) {
-                    scrollToSection(currentIndex + 1);
-                } else if (event.deltaY < 0) {
-                    scrollToSection(currentIndex - 1);
+ <script>
+    //--------------------Scrolling-------------------
+    const sections = document.querySelectorAll('.section');
+    let currentIndex = 0;
+    let isScrolling = false;  // Cooldown flag to prevent rapid scrolling
+    let autoScrollTimeout;  // Variable to store timeout for auto-scroll
+    const autoScrollDelay = 17000;  // 17 seconds
+    
+    const scrollToSection = (index) => {
+        if (index >= 0 && index < sections.length && !isScrolling) {
+            isScrolling = true;  // Set the cooldown flag
+            sections[index].scrollIntoView({ behavior: 'smooth' });
+            currentIndex = index;
+
+            // Reset the timeout for auto-scroll after user interaction
+            resetAutoScroll();
+
+            // Set a timeout equal to the smooth scroll duration
+            setTimeout(() => {
+                isScrolling = false;  // Reset the flag after scrolling completes
+                checkAndExitFullScreen();  // Check if we should exit fullscreen
+            }, 1200);  // 1200ms, slightly longer than the transition time
+        }
+    };
+    
+    // Check and exit fullscreen if on the last section
+    const checkAndExitFullScreen = () => {
+        if (currentIndex === sections.length - 1) {
+            setTimeout(() => {
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
                 }
-            }
-        });
-        
-        // Handle scroll via keyboard arrows
-        window.addEventListener('keydown', (event) => {
-            if (!isScrolling) {
-                if (event.key === 'ArrowDown') {
-                    scrollToSection(currentIndex + 1);
-                } else if (event.key === 'ArrowUp') {
-                    scrollToSection(currentIndex - 1);
-                }
-            }
-        });
-        
-        // Variables to track touch start and end positions
-        let touchStartY = 0;
-        let touchEndY = 0;
-        
-        // Handle touch events for swipe gestures on mobile
-        window.addEventListener('touchstart', (event) => {
-            touchStartY = event.touches[0].clientY;
-        });
-        
-        window.addEventListener('touchmove', (event) => {
-            touchEndY = event.touches[0].clientY;
-        });
-        
-        window.addEventListener('touchend', () => {
-            if (!isScrolling) {
-                if (touchStartY > touchEndY + 50) {  // Swipe up
-                    scrollToSection(currentIndex + 1);
-                } else if (touchStartY < touchEndY - 50) {  // Swipe down
-                    scrollToSection(currentIndex - 1);
-                }
-            }
-        });
-        
-        //--------------------Auto-scroll after 20 seconds-------------------
-        const resetAutoScroll = () => {
-            clearTimeout(autoScrollTimeout);  // Clear previous timeout
-            autoScrollTimeout = setTimeout(() => {
-                // Auto-scroll to the next section after 20 seconds of inactivity
+            }, 10000); // Exit fullscreen after 10 seconds
+        }
+    };
+    
+    // Handle scroll via mouse wheel
+    window.addEventListener('wheel', (event) => {
+        if (!isScrolling) {
+            if (event.deltaY > 0) {
                 scrollToSection(currentIndex + 1);
-            }, autoScrollDelay);
-        };
-        
-        // Set initial timeout for auto-scroll
-        resetAutoScroll();
-        
-        // Reset auto-scroll timer on user interactions
-        ['wheel', 'keydown', 'touchstart'].forEach(eventType => {
-            window.addEventListener(eventType, resetAutoScroll);
-        });
-        
-        //--------------------Flip message-------------------
-        function checkOrientation() {
-            const flipMessage = document.getElementById('flipMessage');
-            
-            if (window.innerHeight > window.innerWidth) {
-                // Portrait mode: Show message
-                flipMessage.style.display = 'flex';
-            } else {
-                // Landscape mode: Hide message
-                flipMessage.style.display = 'none';
+            } else if (event.deltaY < 0) {
+                scrollToSection(currentIndex - 1);
             }
         }
-        
-        // Check orientation on page load
-        checkOrientation();
-        
-        // Listen for orientation changes
-        window.addEventListener('resize', checkOrientation);
-        
-        // Rose petals
-        // Function to initialize animation for a given element ID
-        function initRosePetalAnimation(containerId) {
-            var container = document.getElementById(containerId);
-            var w = window.innerWidth, h = window.innerHeight;
-            var total = 30;
-        
-            // Create and animate rose petals
-            for (var i = 0; i < total; i++) {
-                var Div = document.createElement('div');
-                TweenLite.set(Div, {attr: {class: 'dot'}, x: R(0, w), y: R(-200, -150), z: R(-200, 200)});
-                container.appendChild(Div);
-                animm(Div, h); // Pass height to the animm function
+    });
+    
+    // Handle scroll via keyboard arrows
+    window.addEventListener('keydown', (event) => {
+        if (!isScrolling) {
+            if (event.key === 'ArrowDown') {
+                scrollToSection(currentIndex + 1);
+            } else if (event.key === 'ArrowUp') {
+                scrollToSection(currentIndex - 1);
             }
         }
-        
-        // Reusable animation function for rose petals
-        function animm(elm, height) {
-            TweenMax.to(elm, R(6, 15), {y: height + 100, ease: Linear.easeNone, repeat: -1, delay: -15});
-            TweenMax.to(elm, R(4, 8), {x: '+=100', rotationZ: R(0, 180), repeat: -1, yoyo: true, ease: Sine.easeInOut});
-            TweenMax.to(elm, R(2, 8), {rotationX: R(0, 360), rotationY: R(0, 360), repeat: -1, yoyo: true, ease: Sine.easeInOut, delay: -5});
+    });
+    
+    // Variables to track touch start and end positions
+    let touchStartY = 0;
+    let touchEndY = 0;
+    
+    // Handle touch events for swipe gestures on mobile
+    window.addEventListener('touchstart', (event) => {
+        touchStartY = event.touches[0].clientY;
+    });
+    
+    window.addEventListener('touchmove', (event) => {
+        touchEndY = event.touches[0].clientY;
+    });
+    
+    window.addEventListener('touchend', () => {
+        if (!isScrolling) {
+            if (touchStartY > touchEndY + 50) {  // Swipe up
+                scrollToSection(currentIndex + 1);
+            } else if (touchStartY < touchEndY - 50) {  // Swipe down
+                scrollToSection(currentIndex - 1);
+            }
         }
+    });
+    
+    //--------------------Auto-scroll after 20 seconds-------------------
+    const resetAutoScroll = () => {
+        clearTimeout(autoScrollTimeout);  // Clear previous timeout
+        autoScrollTimeout = setTimeout(() => {
+            // Auto-scroll to the next section after 20 seconds of inactivity
+            scrollToSection(currentIndex + 1);
+        }, autoScrollDelay);
+    };
+    
+    // Set initial timeout for auto-scroll
+    resetAutoScroll();
+    
+    // Reset auto-scroll timer on user interactions
+    ['wheel', 'keydown', 'touchstart'].forEach(eventType => {
+        window.addEventListener(eventType, resetAutoScroll);
+    });
+    
+    //--------------------Flip message-------------------
+    function checkOrientation() {
+        const flipMessage = document.getElementById('flipMessage');
         
-        // Random number generator function
-        function R(min, max) {
-            return min + Math.random() * (max - min);
+        if (window.innerHeight > window.innerWidth) {
+            // Portrait mode: Show message
+            flipMessage.style.display = 'flex';
+        } else {
+            // Landscape mode: Hide message
+            flipMessage.style.display = 'none';
         }
+    }
+    
+    // Check orientation on page load
+    checkOrientation();
+    
+    // Listen for orientation changes
+    window.addEventListener('resize', checkOrientation);
+    
+    // Rose petals
+    // Function to initialize animation for a given element ID
+    function initRosePetalAnimation(containerId) {
+        var container = document.getElementById(containerId);
+        var w = window.innerWidth, h = window.innerHeight;
+        var total = 30;
+    
+        // Create and animate rose petals
+        for (var i = 0; i < total; i++) {
+            var Div = document.createElement('div');
+            TweenLite.set(Div, {attr: {class: 'dot'}, x: R(0, w), y: R(-200, -150), z: R(-200, 200)});
+            container.appendChild(Div);
+            animm(Div, h); // Pass height to the animm function
+        }
+    }
+    
+    // Reusable animation function for rose petals
+    function animm(elm, height) {
+        TweenMax.to(elm, R(6, 15), {y: height + 100, ease: Linear.easeNone, repeat: -1, delay: -15});
+        TweenMax.to(elm, R(4, 8), {x: '+=100', rotationZ: R(0, 180), repeat: -1, yoyo: true, ease: Sine.easeInOut});
+        TweenMax.to(elm, R(2, 8), {rotationX: R(0, 360), rotationY: R(0, 360), repeat: -1, yoyo: true, ease: Sine.easeInOut, delay: -5});
+    }
+    
+    // Random number generator function
+    function R(min, max) {
+        return min + Math.random() * (max - min);
+    }
+    
+    // Initialize animations for multiple containers
+    initRosePetalAnimation("rosePetals1");  // First container
+    initRosePetalAnimation("rosePetals2");  // Second container
+    
+    // Loader
+    // Show the content after the page is fully loaded
+    window.addEventListener("load", function() {
+        const loader = document.getElementById('loader');
+        const main = document.getElementById('main');
         
-        // Initialize animations for multiple containers
-        initRosePetalAnimation("rosePetals1");  // First container
-        initRosePetalAnimation("rosePetals2");  // Second container
+        // Hide the loader
+        loader.style.display = 'none';
+    
+        // Show the content
+        main.style.display = 'block';
+    });
+    
+    // Audio
+    let audio; // Declare audio variable in a broader scope
+    document.addEventListener('DOMContentLoaded', function () {
+        audio = document.getElementById('background-audio'); // Assign the audio element here
         
-        // Loader
-        // Show the content after the page is fully loaded
-        window.addEventListener("load", function() {
-            const loader = document.getElementById('loader');
-            const main = document.getElementById('main');
-            
-            // Hide the loader
-            loader.style.display = 'none';
-        
-            // Show the content
-            main.style.display = 'block';
-        });
-        
-        // Audio
-        let audio; // Declare audio variable in a broader scope
-        document.addEventListener('DOMContentLoaded', function () {
-            const audio = document.getElementById('background-audio');
-            
-            // Attempt autoplay after the user interacts with the page
-            document.body.addEventListener('click', () => {
+        // Attempt autoplay after the user interacts with the page
+        document.body.addEventListener('click', () => {
+            if (audio.paused) { // Only play if the audio is paused
                 audio.volume = 0.2;
-                audio.currentTime = 135;
+                audio.currentTime = 135; // Set the starting point if needed
                 audio.play().catch((error) => {
                     console.log("Autoplay failed: " + error);
                 });
-            });
-        });
-        
-        // Full screen
-        document.getElementById("fullscreen-btn").addEventListener("click", function() {
-            const elem = document.documentElement; // This selects the entire webpage
-        
-            if (!document.fullscreenElement) {
-                if (elem.requestFullscreen) {
-                    elem.requestFullscreen();
-                } else if (elem.mozRequestFullScreen) { // Firefox
-                    elem.mozRequestFullScreen();
-                } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, and Opera
-                    elem.webkitRequestFullscreen();
-                } else if (elem.msRequestFullscreen) { // IE/Edge
-                    elem.msRequestFullscreen();
-                }
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
             }
-            $('.fullScreen').hide();
         });
-        </script>
-        
+    });
+    
+    // Full screen
+    document.getElementById("fullscreen-btn").addEventListener("click", function() {
+        const elem = document.documentElement; // This selects the entire webpage
+    
+        if (!document.fullscreenElement) {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { // Firefox
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { // IE/Edge
+                elem.msRequestFullscreen();
+            }
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+        $('.fullScreen').hide();
+    });
+</script>
+
 
 
 
